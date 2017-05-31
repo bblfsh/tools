@@ -1,0 +1,12 @@
+package: github.com/bblfsh/tools
+import:
+- package: github.com/Sirupsen/logrus
+  version: v0.11.5
+- package: github.com/bblfsh/sdk
+  subpackages:
+  - protocol
+  - uast
+- package: github.com/jessevdk/go-flags
+  version: v1.2.0
+- package: google.golang.org/grpc
+  version: v1.3.0
