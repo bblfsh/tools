@@ -9,7 +9,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/bblfsh/sdk/protocol"
 	"github.com/bblfsh/sdk/uast"
-	"github.com/bblfsh/tools/tools"
+	"github.com/bblfsh/tools"
 )
 
 type Common struct {

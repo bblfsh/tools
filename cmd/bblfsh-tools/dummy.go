@@ -1,6 +1,6 @@
 package main
 
-import "github.com/bblfsh/tools/tools"
+import "github.com/bblfsh/tools"
 
 type Dummy struct {
 	Common
