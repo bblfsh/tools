@@ -20,7 +20,7 @@ type Common struct {
 	} `positional-args:"yes"`
 }
 
-func (c *Common) execute(args []string, tool tools.Tool) error {
+func (c *Common) execute(args []string, tool tools.Tooler) error {
 	logrus.Debugf("executing command")
 
 	request, err := c.buildRequest()
