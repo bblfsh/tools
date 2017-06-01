@@ -3,6 +3,9 @@ package main
 import (
 	"context"
 	"io/ioutil"
+	"strings"
+
+	"srcd.works/go-errors.v0"
 
 	"google.golang.org/grpc"
 
@@ -10,6 +13,11 @@ import (
 	"github.com/bblfsh/sdk/protocol"
 	"github.com/bblfsh/sdk/uast"
 	"github.com/bblfsh/tools"
+)
+
+var (
+	ErrParserFatal = errors.NewKind("Fatal response from UAST parser: %s")
+	ErrParserError = errors.NewKind("Error response from UAST parser: %s")
 )
 
 type Common struct {
@@ -58,6 +66,12 @@ func (c *Common) parseRequest(request *protocol.ParseUASTRequest) (*uast.Node, e
 	if err != nil {
 		return nil, err
 	}
-
-	return response.UAST, nil
+	switch response.Status {
+	case protocol.Fatal:
+		return nil, ErrParserFatal.New(strings.Join(response.Errors, "\n"))
+	case protocol.Error:
+		return nil, ErrParserError.New(strings.Join(response.Errors, "\n"))
+	default:
+		return response.UAST, nil
+	}
 }
