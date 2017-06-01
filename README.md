@@ -38,6 +38,59 @@ If the server is in a different location, use the `address` parameter:
 Once connection with the server is working fine, you can use any other
 available tool in a similar way.
 
+## How to add a new tool to Babelfish Tools
+
+Adding a new tool to Babelfish Tools involves two steps: implementing
+the Tool interface and adding it as a command to the CLI interface.
+
+### Implementing the Tooler interface
+
+The `Tooler` interface has a single method `Exec(*uast.Node) error`,
+that is, a tool must implement a method called `Exec` that receives a
+pointer to an UAST node and returns an optional `error`.
+
+It's also convenient to create a new type for the new tool, to be used
+in the CLI interface command. In the simplest case, an empty struct
+will do: `type Dummy struct{}`
+
+### Adding the new tool as a command to the CLI interface
+
+Create a new file for the tool command in the `cmd/bblfsh-tools`
+directory.
+
+Create a new type there for your tool. It should at least include
+Common struct. If your tool will support additional parameters, add
+them there. In the simplest case, it'd just be:
+
+```go
+type Dummy struct {
+	Common
+}
+```
+
+Implement the
+[Commander interface](https://godoc.org/github.com/jessevdk/go-flags#Commander). There's
+a helper common method `execute` that will provides a good default, in
+most cases calling this method should be enough:
+
+```go
+func (c *Dummy) Execute(args []string) error {
+	return c.execute(args, tools.Dummy{})
+}
+```
+
+Note that `tools.Dummy{}` is the instance of the type that implements
+the `Tooler` interface that we described in the previous section.
+
+At this point, only adding the command to the parser is left. This is
+done at `cmd/bblfsh-tools/main.go`:
+
+```go
+parser.AddCommand("dummy", "", "Run dummy tool", &Dummy{})
+```
+
+And that's it, rebuild and your new tool should be ready to use.
+
 ## License
 
 GPLv3, see [LICENSE](LICENSE)
