@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"io/ioutil"
+	"path/filepath"
 	"strings"
 
 	"srcd.works/go-errors.v0"
@@ -51,7 +52,12 @@ func (c *Common) buildRequest() (*protocol.ParseUASTRequest, error) {
 		return nil, err
 	}
 
-	return &protocol.ParseUASTRequest{Content: string(content)}, nil
+	request := &protocol.ParseUASTRequest{
+		Filename: filepath.Base(c.Args.File),
+		Language: c.Language,
+		Content:  string(content),
+	}
+	return request, nil
 }
 
 func (c *Common) parseRequest(request *protocol.ParseUASTRequest) (*uast.Node, error) {
