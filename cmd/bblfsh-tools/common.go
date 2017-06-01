@@ -6,14 +6,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"srcd.works/go-errors.v0"
-
-	"google.golang.org/grpc"
+	"github.com/bblfsh/tools"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/bblfsh/sdk/protocol"
 	"github.com/bblfsh/sdk/uast"
-	"github.com/bblfsh/tools"
+	"google.golang.org/grpc"
+	"srcd.works/go-errors.v0"
 )
 
 var (
