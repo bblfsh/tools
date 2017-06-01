@@ -7,13 +7,14 @@ Language analysis tools on top of Babelfish
 
 ## Build
 
-### With docker
+```sh
+make dependencies
+go build
+```
+
+If you want to build a docker image containing Babelfish Tools, run:
 
 `make build`
-
-### Without docker
-
-`make build-internal`
 
 ## Usage
 
@@ -23,8 +24,12 @@ see which tools are supported, run:
 `bblfsh-tools --help`
 
 To make use of any of these tools you need to have the Babelfish
-server up and running. Look at
-[server site](https://github.com/bblfsh/server/) for details.
+server up and running. The easiest way to do so is through docker:
+
+`docker run --privileged -p 9432:9432 --name bblfsh bblfsh/server`
+
+Look at [server site](https://github.com/bblfsh/server/) for more
+information.
 
 Once you have a server running, you can use the dummy tool, which
 should let you know if the connection with the server succeeded:
