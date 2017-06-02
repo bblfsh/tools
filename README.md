@@ -40,7 +40,7 @@ If the server is in a different location, use the `address` parameter:
 
 `bblfsh-tools dummy --address location:port path/to/source/code`
 
-Once connection with the server is working fine, you can use any other
+Once the connection with the server is working fine, you can use any other
 available tool in a similar way.
 
 ## How to add a new tool to Babelfish Tools
