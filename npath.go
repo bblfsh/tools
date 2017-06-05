@@ -165,19 +165,14 @@ func visitReturn(n *uast.Node) int {
 }
 
 func visitSwitch(n *uast.Node) int {
-
 	caseDefault := n.ChildrenOfRole(uast.SwitchDefault)
 	switchCases := n.ChildrenOfRole(uast.SwitchCase)
-	switchCondition := n.ChildrenOfRole(uast.SwitchCaseCondition)
 	npath := 0
-	/*
-		In pmd the expressionComp function returns always our value -1
-		but in other places of the code the fuction works exactly as our function
-		I suposed this happens because java AST differs with the UAST
-	*/
-	npath += expressionComp(switchCondition[0]) - 1
+
 	if len(caseDefault) != 0 {
 		npath += complexityMultOf(caseDefault[0])
+	} else {
+		npath++
 	}
 	for _, switchCase := range switchCases {
 		npath += complexityMultOf(switchCase)
