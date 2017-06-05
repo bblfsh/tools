@@ -15,6 +15,7 @@ func main() {
 	parser := flags.NewNamedParser("bblfsh-tools", flags.Default)
 	parser.AddCommand("dummy", "", "Run dummy tool", &Dummy{})
 	parser.AddCommand("tokenizer", "", "Run tokenizer tool", &Tokenizer{})
+	parser.AddCommand("cyclomatic", "", "Run cyclomatic complexity tool", &CyclomaticComp{})
 
 	if _, err := parser.Parse(); err != nil {
 		if flagsErr, ok := err.(*flags.Error); ok {
