@@ -10,3 +10,9 @@ import:
   version: v1.2.0
 - package: google.golang.org/grpc
   version: v1.3.0
+- package: srcd.works/go-errors.v0
+testImport:
+- package: github.com/stretchr/testify
+  version: v1.1.4
+  subpackages:
+  - require

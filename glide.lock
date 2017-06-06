@@ -1,5 +1,5 @@
-hash: d15f340e9e4663fd5c63232d33fbf9816fbe0a89ded1d61d99f86e48e9c8c417
-updated: 2017-06-01T18:27:35.508534629+02:00
+hash: a81eeb5ad7dde7d1e106bc20f11ce13ece6097d78dfd1cf502c4d65b57345ffa
+updated: 2017-06-06T11:54:07.833141099+02:00
 imports:
 - name: github.com/bblfsh/sdk
   version: 2ee6544d9c7dcf1bc4fac98e4e0f565ea3a92402
@@ -66,4 +66,17 @@ imports:
   - transport
 - name: srcd.works/go-errors.v0
   version: 6f07baca276330431b44ece8ee84ac98167bc4ea
-testImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
+  - require
