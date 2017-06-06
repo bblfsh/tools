@@ -43,15 +43,15 @@ import (
 // evaluate more than two items with a single operator.  (FIXME when both things are solved in the UAST
 // definition and the SDK).
 
-type CyclomaticComp struct{}
+type CyclomaticComplexity struct{}
 
-func (cc CyclomaticComp) Exec(n *uast.Node) error {
-	result := CyclomaticComplexity(n)
+func (cc CyclomaticComplexity) Exec(n *uast.Node) error {
+	result := CyclomaticComplex(n)
 	fmt.Println("Cyclomatic Complexity= ", result)
 	return nil
 }
 
-func CyclomaticComplexity(n *uast.Node) int {
+func CyclomaticComplex(n *uast.Node) int {
 	complx := 1
 
 	iter := uast.NewOrderPathIter(uast.NewPath(n))
@@ -63,13 +63,16 @@ func CyclomaticComplexity(n *uast.Node) int {
 		}
 		n := p.Node()
 		for _, r := range n.Roles {
-			switch r {
-			case uast.If, uast.SwitchCase, uast.For, uast.ForEach, uast.While,
-				uast.DoWhile, uast.TryCatch, uast.Continue, uast.OpBooleanAnd, uast.OpBooleanOr,
-				uast.OpBooleanXor:
+			if addsComplexity(r) {
 				complx++
 			}
 		}
 	}
 	return complx
+}
+
+func addsComplexity(r uast.Role) bool {
+	return r == uast.If || r == uast.SwitchCase || r == uast.For || r == uast.ForEach ||
+		r == uast.DoWhile || r == uast.While || r == uast.TryCatch || r == uast.Continue ||
+		r == uast.OpBooleanAnd || r == uast.OpBooleanOr || r == uast.OpBooleanXor
 }
