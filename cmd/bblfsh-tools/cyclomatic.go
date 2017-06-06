@@ -7,5 +7,5 @@ type CyclomaticComp struct {
 }
 
 func (c *CyclomaticComp) Execute(args []string) error {
-	return c.execute(args, tools.CyclomaticComp{})
+	return c.execute(args, tools.CyclomaticComplexity{})
 }
