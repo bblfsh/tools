@@ -6,29 +6,29 @@ import (
 	"github.com/bblfsh/sdk/uast"
 )
 
-//CodeReference
-//https://pmd.github.io/pmd-5.7.0/pmd-java/xref/net/sourceforge/pmd/lang/java/rule/codesize/NPathComplexityRule.html
+type NPath struct{}
 
-type Npath struct{}
-
-type NpathData struct {
+type NPathData struct {
 	Name       string
 	Complexity int
 }
 
-func (np Npath) Exec(n *uast.Node) error {
-	result := NpathComplexity(n)
+func (np NPath) Exec(n *uast.Node) error {
+	result := NPathComplexity(n)
 	fmt.Println(result)
 	return nil
 }
 
-func (nd *NpathData) String() string {
+func (nd *NPathData) String() string {
 	return fmt.Sprintf("FuncName:%s, Complexity:%d\n", nd.Name, nd.Complexity)
 }
 
-//NpathComplexity return a NpathData for each function in the tree
-func NpathComplexity(n *uast.Node) []*NpathData {
-	var result []*NpathData
+//Npath computes the NPath of functions in a *uast.Node.
+//
+//PMD is considered the reference implementation to assert correctness.
+//See: https://pmd.github.io/pmd-5.7.0/pmd-java/xref/net/sourceforge/pmd/lang/java/rule/codesize/NPathComplexityRule.html
+func NPathComplexity(n *uast.Node) []*NPathData {
+	var result []*NPathData
 	var funcs []*uast.Node
 	var names []string
 
@@ -44,7 +44,7 @@ func NpathComplexity(n *uast.Node) []*NpathData {
 	}
 	for i, function := range funcs {
 		npath := visitFunctionBody(function)
-		result = append(result, &NpathData{Name: names[i], Complexity: npath})
+		result = append(result, &NPathData{Name: names[i], Complexity: npath})
 	}
 
 	return result

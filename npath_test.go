@@ -113,7 +113,7 @@ func TestExpresionComplex(t *testing.T) {
 	require.Equal(expect, result)
 }
 
-func TestNpathComplexity(t *testing.T) {
+func TestNPathComplexity(t *testing.T) {
 	require := require.New(t)
 	var result []int
 	var expect []int
@@ -126,7 +126,7 @@ func TestNpathComplexity(t *testing.T) {
 		statement,
 	}}
 
-	npathData := NpathComplexity(n)
+	npathData := NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 1)
 	/*
@@ -169,7 +169,7 @@ func TestNpathComplexity(t *testing.T) {
 		nIf,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 7)
 
@@ -203,7 +203,7 @@ func TestNpathComplexity(t *testing.T) {
 		nIf2Roles,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 7)
 
@@ -222,7 +222,7 @@ func TestNpathComplexity(t *testing.T) {
 		nSimpleIf,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
@@ -238,7 +238,7 @@ func TestNpathComplexity(t *testing.T) {
 		nIf,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 343)
 
@@ -276,7 +276,7 @@ func TestNpathComplexity(t *testing.T) {
 		nNestedIf,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 10)
 
@@ -312,7 +312,7 @@ func TestNpathComplexity(t *testing.T) {
 		nWhile,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 3)
 
@@ -346,7 +346,7 @@ func TestNpathComplexity(t *testing.T) {
 		nNestedWhile,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 7)
 
@@ -376,7 +376,7 @@ func TestNpathComplexity(t *testing.T) {
 		nFor,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
@@ -416,7 +416,7 @@ func TestNpathComplexity(t *testing.T) {
 		nNestedFor,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 4)
 
@@ -443,7 +443,7 @@ func TestNpathComplexity(t *testing.T) {
 		nDoWhile,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 4)
 
@@ -477,7 +477,7 @@ func TestNpathComplexity(t *testing.T) {
 		nNestedDoWhile,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 10)
 
@@ -520,7 +520,7 @@ func TestNpathComplexity(t *testing.T) {
 		nSwitch,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 3)
 
@@ -560,7 +560,7 @@ func TestNpathComplexity(t *testing.T) {
 		nNestedSwitch,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 5)
 
@@ -571,7 +571,7 @@ func TestNpathComplexity(t *testing.T) {
 		{InternalType: "Return", Roles: []uast.Role{uast.Return}},
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 1)
 
@@ -590,7 +590,7 @@ func TestNpathComplexity(t *testing.T) {
 		nReturn,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
@@ -604,7 +604,7 @@ func TestNpathComplexity(t *testing.T) {
 		nForEach,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
@@ -627,7 +627,7 @@ func TestNpathComplexity(t *testing.T) {
 		nTry,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
@@ -646,7 +646,7 @@ func TestNpathComplexity(t *testing.T) {
 		nTryFinally,
 	}}
 
-	npathData = NpathComplexity(n)
+	npathData = NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 6)
 
@@ -704,7 +704,7 @@ func TestNpathMultiFunc(t *testing.T) {
 		func2,
 		func3,
 	}}
-	npathData := NpathComplexity(n)
+	npathData := NPathComplexity(n)
 	for _, v := range npathData {
 		result = append(result, v.Complexity)
 	}
@@ -714,18 +714,18 @@ func TestZeroFunction(t *testing.T) {
 	require := require.New(t)
 	// Empty tree
 	n := &uast.Node{InternalType: "module"}
-	comp := NpathComplexity(n)
+	comp := NPathComplexity(n)
 	require.Equal(0, len(comp))
 }
 
 func TestRealUAST(t *testing.T) {
 	fileNames := []string{
-		"fixtures/npath/ifelse.json",
-		"fixtures/npath/do_while.json",
-		"fixtures/npath/while.json",
-		"fixtures/npath/for.json",
-		"fixtures/npath/someFuncs.json",
-		"fixtures/npath/switch.json",
+		"fixtures/npath/ifelse.java.json",
+		"fixtures/npath/do_while.java.json",
+		"fixtures/npath/while.java.json",
+		"fixtures/npath/for.java.json",
+		"fixtures/npath/someFuncs.java.json",
+		"fixtures/npath/switch.java.json",
 	}
 
 	require := require.New(t)
@@ -740,7 +740,7 @@ func TestRealUAST(t *testing.T) {
 		err = dec.Decode(req)
 		require.NoError(err)
 		n := req.UAST
-		npathData := NpathComplexity(n)
+		npathData := NPathComplexity(n)
 		for _, v := range npathData {
 			result = append(result, v.Complexity)
 		}
