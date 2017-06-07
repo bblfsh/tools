@@ -11,6 +11,84 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestCountChildrenOfRole(t *testing.T) {
+	require := require.New(t)
+
+	n1 := &uast.Node{InternalType: "module", Children: []*uast.Node{
+		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}},
+		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}},
+		{InternalType: "If", Roles: []uast.Role{uast.If}},
+	}}
+	n2 := &uast.Node{InternalType: "module", Children: []*uast.Node{
+		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}, Children: []*uast.Node{
+			{InternalType: "Statement", Roles: []uast.Role{uast.Statement}, Children: []*uast.Node{
+				{InternalType: "If", Roles: []uast.Role{uast.If}},
+				{InternalType: "Statemenet", Roles: []uast.Role{uast.Statement}},
+			}},
+		}},
+	}}
+	result := countChildrenOfRole(n1, uast.Statement)
+	expect := 2
+	require.Equal(expect, result)
+
+	result = countChildrenOfRole(n2, uast.Statement)
+	expect = 1
+	require.Equal(expect, result)
+
+	result = deepCountChildrenOfRole(n1, uast.Statement)
+	expect = 2
+	require.Equal(expect, result)
+
+	result = deepCountChildrenOfRole(n2, uast.Statement)
+	expect = 3
+	require.Equal(expect, result)
+}
+
+func TestChildrenOfRole(t *testing.T) {
+	require := require.New(t)
+
+	n1 := &uast.Node{InternalType: "module", Children: []*uast.Node{
+		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}},
+		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}},
+		{InternalType: "If", Roles: []uast.Role{uast.If}},
+	}}
+	n2 := &uast.Node{InternalType: "module", Children: []*uast.Node{
+		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}, Children: []*uast.Node{
+			{InternalType: "Statement", Roles: []uast.Role{uast.Statement}, Children: []*uast.Node{
+				{InternalType: "If", Roles: []uast.Role{uast.If}},
+				{InternalType: "Statemenet", Roles: []uast.Role{uast.Statement}},
+			}},
+		}},
+	}}
+
+	result := childrenOfRole(n1, uast.Statement)
+	expect := 2
+	require.Equal(expect, len(result))
+
+	result = childrenOfRole(n2, uast.Statement)
+	expect = 1
+	require.Equal(expect, len(result))
+
+	result = deepChildrenOfRole(n1, uast.Statement)
+	expect = 2
+	require.Equal(expect, len(result))
+
+	result = deepChildrenOfRole(n2, uast.Statement)
+	expect = 3
+	require.Equal(expect, len(result))
+}
+
+func TestContainsRole(t *testing.T) {
+	require := require.New(t)
+	n := &uast.Node{InternalType: "node", Roles: []uast.Role{uast.Statement, uast.If}}
+
+	result := containsRole(n, uast.If)
+	require.Equal(true, result)
+
+	result = containsRole(n, uast.Switch)
+	require.Equal(false, result)
+}
+
 func TestExpresionComplex(t *testing.T) {
 	require := require.New(t)
 
