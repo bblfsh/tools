@@ -28,5 +28,5 @@ func TestCyclomaticComplexity(t *testing.T) {
 				{InternalType: "break", Roles: []uast.Role{uast.Break}},
 			},
 			}}}
-	require.Equal(CyclomaticComplex(n), 6)
+	require.Equal(cyclomaticComplexity(n), 6)
 }

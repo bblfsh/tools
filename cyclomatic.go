@@ -46,13 +46,13 @@ import (
 type CyclomaticComplexity struct{}
 
 func (cc CyclomaticComplexity) Exec(n *uast.Node) error {
-	result := CyclomaticComplex(n)
-	fmt.Println("Cyclomatic Complexity= ", result)
+	result := cyclomaticComplexity(n)
+	fmt.Println("Cyclomatic Complexity = ", result)
 	return nil
 }
 
-func CyclomaticComplex(n *uast.Node) int {
-	complx := 1
+func cyclomaticComplexity(n *uast.Node) int {
+	complexity := 1
 
 	iter := uast.NewOrderPathIter(uast.NewPath(n))
 
@@ -64,11 +64,11 @@ func CyclomaticComplex(n *uast.Node) int {
 		n := p.Node()
 		for _, r := range n.Roles {
 			if addsComplexity(r) {
-				complx++
+				complexity++
 			}
 		}
 	}
-	return complx
+	return complexity
 }
 
 func addsComplexity(r uast.Role) bool {
