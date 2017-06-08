@@ -1,0 +1,808 @@
+{
+    "status": "ok",
+    "errors": [],
+    "uast": {
+        "InternalType": "CompilationUnit",
+        "Children": [
+            {
+                "InternalType": "TypeDeclaration",
+                "Properties": {
+                    "interface": "false",
+                    "internalRole": "types"
+                },
+                "Children": [
+                    {
+                        "InternalType": "Modifier",
+                        "Properties": {
+                            "internalRole": "modifiers"
+                        },
+                        "Token": "public",
+                        "StartPosition": {
+                            "Offset": 0,
+                            "Line": 1,
+                            "Col": 0
+                        }
+                    },
+                    {
+                        "InternalType": "SimpleName",
+                        "Properties": {
+                            "internalRole": "name"
+                        },
+                        "Token": "Code",
+                        "StartPosition": {
+                            "Offset": 13,
+                            "Line": 1,
+                            "Col": 0
+                        },
+                        "Roles": [
+                            1
+                        ]
+                    },
+                    {
+                        "InternalType": "MethodDeclaration",
+                        "Properties": {
+                            "constructor": "false",
+                            "internalRole": "bodyDeclarations"
+                        },
+                        "Children": [
+                            {
+                                "InternalType": "Modifier",
+                                "Properties": {
+                                    "internalRole": "modifiers"
+                                },
+                                "Token": "public",
+                                "StartPosition": {
+                                    "Offset": 25,
+                                    "Line": 3,
+                                    "Col": 0
+                                }
+                            },
+                            {
+                                "InternalType": "PrimitiveType",
+                                "Properties": {
+                                    "internalRole": "returnType2"
+                                },
+                                "Token": "void",
+                                "StartPosition": {
+                                    "Offset": 32,
+                                    "Line": 3,
+                                    "Col": 0
+                                }
+                            },
+                            {
+                                "InternalType": "SimpleName",
+                                "Properties": {
+                                    "internalRole": "name"
+                                },
+                                "Token": "Code",
+                                "StartPosition": {
+                                    "Offset": 37,
+                                    "Line": 3,
+                                    "Col": 0
+                                },
+                                "Roles": [
+                                    1,
+                                    52
+                                ]
+                            },
+                            {
+                                "InternalType": "Block",
+                                "Properties": {
+                                    "internalRole": "body"
+                                },
+                                "Children": [
+                                    {
+                                        "InternalType": "TryStatement",
+                                        "Properties": {
+                                            "internalRole": "statements"
+                                        },
+                                        "Children": [
+                                            {
+                                                "InternalType": "Block",
+                                                "Properties": {
+                                                    "internalRole": "body"
+                                                },
+                                                "Children": [
+                                                    {
+                                                        "InternalType": "ExpressionStatement",
+                                                        "Properties": {
+                                                            "internalRole": "statements"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "MethodInvocation",
+                                                                "Properties": {
+                                                                    "internalRole": "expression"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "QualifiedName",
+                                                                        "Properties": {
+                                                                            "internalRole": "expression"
+                                                                        },
+                                                                        "Children": [
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "qualifier"
+                                                                                },
+                                                                                "Token": "System",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 68,
+                                                                                    "Line": 5,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "name"
+                                                                                },
+                                                                                "Token": "out",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 75,
+                                                                                    "Line": 5,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "Roles": [
+                                                                            2,
+                                                                            104
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "SimpleName",
+                                                                        "Properties": {
+                                                                            "internalRole": "name"
+                                                                        },
+                                                                        "Token": "println",
+                                                                        "StartPosition": {
+                                                                            "Offset": 79,
+                                                                            "Line": 5,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            1,
+                                                                            105
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "StringLiteral",
+                                                                        "Properties": {
+                                                                            "internalRole": "arguments"
+                                                                        },
+                                                                        "Token": "\"try\"",
+                                                                        "StartPosition": {
+                                                                            "Offset": 87,
+                                                                            "Line": 5,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            121,
+                                                                            106
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "Roles": [
+                                                                    103
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "Roles": [
+                                                            16
+                                                        ]
+                                                    }
+                                                ],
+                                                "Roles": [
+                                                    95,
+                                                    94
+                                                ]
+                                            },
+                                            {
+                                                "InternalType": "CatchClause",
+                                                "Properties": {
+                                                    "internalRole": "catchClauses"
+                                                },
+                                                "Children": [
+                                                    {
+                                                        "InternalType": "SingleVariableDeclaration",
+                                                        "Properties": {
+                                                            "internalRole": "exception",
+                                                            "varargs": "false"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "SimpleType",
+                                                                "Properties": {
+                                                                    "internalRole": "type"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "SimpleName",
+                                                                        "Properties": {
+                                                                            "internalRole": "name"
+                                                                        },
+                                                                        "Token": "Exception",
+                                                                        "StartPosition": {
+                                                                            "Offset": 111,
+                                                                            "Line": 6,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            1
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "InternalType": "SimpleName",
+                                                                "Properties": {
+                                                                    "internalRole": "name"
+                                                                },
+                                                                "Token": "e",
+                                                                "StartPosition": {
+                                                                    "Offset": 121,
+                                                                    "Line": 6,
+                                                                    "Col": 0
+                                                                },
+                                                                "Roles": [
+                                                                    1
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "StartPosition": {
+                                                            "Offset": 111,
+                                                            "Line": 6,
+                                                            "Col": 0
+                                                        }
+                                                    },
+                                                    {
+                                                        "InternalType": "Block",
+                                                        "Properties": {
+                                                            "internalRole": "body"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "ExpressionStatement",
+                                                                "Properties": {
+                                                                    "internalRole": "statements"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "MethodInvocation",
+                                                                        "Properties": {
+                                                                            "internalRole": "expression"
+                                                                        },
+                                                                        "Children": [
+                                                                            {
+                                                                                "InternalType": "QualifiedName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "expression"
+                                                                                },
+                                                                                "Children": [
+                                                                                    {
+                                                                                        "InternalType": "SimpleName",
+                                                                                        "Properties": {
+                                                                                            "internalRole": "qualifier"
+                                                                                        },
+                                                                                        "Token": "System",
+                                                                                        "StartPosition": {
+                                                                                            "Offset": 135,
+                                                                                            "Line": 7,
+                                                                                            "Col": 0
+                                                                                        },
+                                                                                        "Roles": [
+                                                                                            1
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "InternalType": "SimpleName",
+                                                                                        "Properties": {
+                                                                                            "internalRole": "name"
+                                                                                        },
+                                                                                        "Token": "out",
+                                                                                        "StartPosition": {
+                                                                                            "Offset": 142,
+                                                                                            "Line": 7,
+                                                                                            "Col": 0
+                                                                                        },
+                                                                                        "Roles": [
+                                                                                            1
+                                                                                        ]
+                                                                                    }
+                                                                                ],
+                                                                                "Roles": [
+                                                                                    2,
+                                                                                    104
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "name"
+                                                                                },
+                                                                                "Token": "println",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 146,
+                                                                                    "Line": 7,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1,
+                                                                                    105
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "StringLiteral",
+                                                                                "Properties": {
+                                                                                    "internalRole": "arguments"
+                                                                                },
+                                                                                "Token": "\"catch\"",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 154,
+                                                                                    "Line": 7,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    121,
+                                                                                    106
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "Roles": [
+                                                                            103
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "Roles": [
+                                                                    16
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "Roles": [
+                                                            95,
+                                                            94
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "InternalType": "Block",
+                                                "Properties": {
+                                                    "internalRole": "finally"
+                                                },
+                                                "Children": [
+                                                    {
+                                                        "InternalType": "ExpressionStatement",
+                                                        "Properties": {
+                                                            "internalRole": "statements"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "MethodInvocation",
+                                                                "Properties": {
+                                                                    "internalRole": "expression"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "QualifiedName",
+                                                                        "Properties": {
+                                                                            "internalRole": "expression"
+                                                                        },
+                                                                        "Children": [
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "qualifier"
+                                                                                },
+                                                                                "Token": "System",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 185,
+                                                                                    "Line": 9,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "name"
+                                                                                },
+                                                                                "Token": "out",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 192,
+                                                                                    "Line": 9,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "Roles": [
+                                                                            2,
+                                                                            104
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "SimpleName",
+                                                                        "Properties": {
+                                                                            "internalRole": "name"
+                                                                        },
+                                                                        "Token": "println",
+                                                                        "StartPosition": {
+                                                                            "Offset": 196,
+                                                                            "Line": 9,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            1,
+                                                                            105
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "StringLiteral",
+                                                                        "Properties": {
+                                                                            "internalRole": "arguments"
+                                                                        },
+                                                                        "Token": "\"finally\"",
+                                                                        "StartPosition": {
+                                                                            "Offset": 204,
+                                                                            "Line": 9,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            121,
+                                                                            106
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "Roles": [
+                                                                    103
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "Roles": [
+                                                            16
+                                                        ]
+                                                    },
+                                                    {
+                                                        "InternalType": "ExpressionStatement",
+                                                        "Properties": {
+                                                            "internalRole": "statements"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "MethodInvocation",
+                                                                "Properties": {
+                                                                    "internalRole": "expression"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "QualifiedName",
+                                                                        "Properties": {
+                                                                            "internalRole": "expression"
+                                                                        },
+                                                                        "Children": [
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "qualifier"
+                                                                                },
+                                                                                "Token": "System",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 218,
+                                                                                    "Line": 10,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "name"
+                                                                                },
+                                                                                "Token": "out",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 225,
+                                                                                    "Line": 10,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "Roles": [
+                                                                            2,
+                                                                            104
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "SimpleName",
+                                                                        "Properties": {
+                                                                            "internalRole": "name"
+                                                                        },
+                                                                        "Token": "println",
+                                                                        "StartPosition": {
+                                                                            "Offset": 229,
+                                                                            "Line": 10,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            1,
+                                                                            105
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "StringLiteral",
+                                                                        "Properties": {
+                                                                            "internalRole": "arguments"
+                                                                        },
+                                                                        "Token": "\"finally\"",
+                                                                        "StartPosition": {
+                                                                            "Offset": 237,
+                                                                            "Line": 10,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            121,
+                                                                            106
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "Roles": [
+                                                                    103
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "Roles": [
+                                                            16
+                                                        ]
+                                                    },
+                                                    {
+                                                        "InternalType": "ExpressionStatement",
+                                                        "Properties": {
+                                                            "internalRole": "statements"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "MethodInvocation",
+                                                                "Properties": {
+                                                                    "internalRole": "expression"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "QualifiedName",
+                                                                        "Properties": {
+                                                                            "internalRole": "expression"
+                                                                        },
+                                                                        "Children": [
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "qualifier"
+                                                                                },
+                                                                                "Token": "System",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 251,
+                                                                                    "Line": 11,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "name"
+                                                                                },
+                                                                                "Token": "out",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 258,
+                                                                                    "Line": 11,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "Roles": [
+                                                                            2,
+                                                                            104
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "SimpleName",
+                                                                        "Properties": {
+                                                                            "internalRole": "name"
+                                                                        },
+                                                                        "Token": "println",
+                                                                        "StartPosition": {
+                                                                            "Offset": 262,
+                                                                            "Line": 11,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            1,
+                                                                            105
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "StringLiteral",
+                                                                        "Properties": {
+                                                                            "internalRole": "arguments"
+                                                                        },
+                                                                        "Token": "\"finally\"",
+                                                                        "StartPosition": {
+                                                                            "Offset": 270,
+                                                                            "Line": 11,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            121,
+                                                                            106
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "Roles": [
+                                                                    103
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "Roles": [
+                                                            16
+                                                        ]
+                                                    },
+                                                    {
+                                                        "InternalType": "ExpressionStatement",
+                                                        "Properties": {
+                                                            "internalRole": "statements"
+                                                        },
+                                                        "Children": [
+                                                            {
+                                                                "InternalType": "MethodInvocation",
+                                                                "Properties": {
+                                                                    "internalRole": "expression"
+                                                                },
+                                                                "Children": [
+                                                                    {
+                                                                        "InternalType": "QualifiedName",
+                                                                        "Properties": {
+                                                                            "internalRole": "expression"
+                                                                        },
+                                                                        "Children": [
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "qualifier"
+                                                                                },
+                                                                                "Token": "System",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 284,
+                                                                                    "Line": 12,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "InternalType": "SimpleName",
+                                                                                "Properties": {
+                                                                                    "internalRole": "name"
+                                                                                },
+                                                                                "Token": "out",
+                                                                                "StartPosition": {
+                                                                                    "Offset": 291,
+                                                                                    "Line": 12,
+                                                                                    "Col": 0
+                                                                                },
+                                                                                "Roles": [
+                                                                                    1
+                                                                                ]
+                                                                            }
+                                                                        ],
+                                                                        "Roles": [
+                                                                            2,
+                                                                            104
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "SimpleName",
+                                                                        "Properties": {
+                                                                            "internalRole": "name"
+                                                                        },
+                                                                        "Token": "println",
+                                                                        "StartPosition": {
+                                                                            "Offset": 295,
+                                                                            "Line": 12,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            1,
+                                                                            105
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "InternalType": "StringLiteral",
+                                                                        "Properties": {
+                                                                            "internalRole": "arguments"
+                                                                        },
+                                                                        "Token": "\"finally\"",
+                                                                        "StartPosition": {
+                                                                            "Offset": 303,
+                                                                            "Line": 12,
+                                                                            "Col": 0
+                                                                        },
+                                                                        "Roles": [
+                                                                            121,
+                                                                            106
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "Roles": [
+                                                                    103
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "Roles": [
+                                                            16
+                                                        ]
+                                                    }
+                                                ],
+                                                "Roles": [
+                                                    95,
+                                                    94
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "Roles": [
+                                    51,
+                                    95,
+                                    94
+                                ]
+                            }
+                        ],
+                        "StartPosition": {
+                            "Offset": 25,
+                            "Line": 3,
+                            "Col": 0
+                        },
+                        "Roles": [
+                            69,
+                            50
+                        ]
+                    }
+                ],
+                "StartPosition": {
+                    "Offset": 0,
+                    "Line": 1,
+                    "Col": 0
+                },
+                "Roles": [
+                    69,
+                    58
+                ]
+            }
+        ],
+        "Roles": [
+            36
+        ]
+    }
+}
