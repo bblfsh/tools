@@ -17,7 +17,7 @@ BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 # Go parameters
 GO_CMD = go
-GO_BUILD = $(GO_CMD) build
+GO_BUILD = $(GO_CMD) build -a
 GO_CLEAN = $(GO_CMD) clean
 GO_GET = $(GO_CMD) get -v
 GO_TEST = $(GO_CMD) test -v
