@@ -736,10 +736,10 @@ func TestRealUAST(t *testing.T) {
 
 		reader := bufio.NewReader(file)
 		dec := json.NewDecoder(reader)
-		req := &protocol.ParseUASTResponse{}
-		err = dec.Decode(req)
+		res := &protocol.ParseResponse{}
+		err = dec.Decode(res)
 		require.NoError(err)
-		n := req.UAST
+		n := res.UAST
 		npathData := NPathComplexity(n)
 		for _, v := range npathData {
 			result = append(result, v.Complexity)

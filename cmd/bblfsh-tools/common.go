@@ -16,8 +16,8 @@ import (
 )
 
 var (
-	ErrParserFatal = errors.NewKind("Fatal response from UAST parser: %s")
-	ErrParserError = errors.NewKind("Error response from UAST parser: %s")
+	ErrParserFatal = errors.NewKind("Fatal response from parser: %s")
+	ErrParserError = errors.NewKind("Error response from parser: %s")
 )
 
 type Common struct {
@@ -44,14 +44,14 @@ func (c *Common) execute(args []string, tool tools.Tooler) error {
 	return tool.Exec(uast)
 }
 
-func (c *Common) buildRequest() (*protocol.ParseUASTRequest, error) {
+func (c *Common) buildRequest() (*protocol.ParseRequest, error) {
 	logrus.Debugf("reading file %s", c.Args.File)
 	content, err := ioutil.ReadFile(c.Args.File)
 	if err != nil {
 		return nil, err
 	}
 
-	request := &protocol.ParseUASTRequest{
+	request := &protocol.ParseRequest{
 		Filename: filepath.Base(c.Args.File),
 		Language: c.Language,
 		Content:  string(content),
@@ -59,7 +59,7 @@ func (c *Common) buildRequest() (*protocol.ParseUASTRequest, error) {
 	return request, nil
 }
 
-func (c *Common) parseRequest(request *protocol.ParseUASTRequest) (*uast.Node, error) {
+func (c *Common) parseRequest(request *protocol.ParseRequest) (*uast.Node, error) {
 	logrus.Debugf("dialing request at %s", c.Address)
 	connection, err := grpc.Dial(c.Address, grpc.WithInsecure())
 	if err != nil {
@@ -67,7 +67,7 @@ func (c *Common) parseRequest(request *protocol.ParseUASTRequest) (*uast.Node, e
 	}
 
 	client := protocol.NewProtocolServiceClient(connection)
-	response, err := client.ParseUAST(context.TODO(), request)
+	response, err := client.Parse(context.TODO(), request)
 	if err != nil {
 		return nil, err
 	}
