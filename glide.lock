@@ -1,8 +1,8 @@
-hash: a81eeb5ad7dde7d1e106bc20f11ce13ece6097d78dfd1cf502c4d65b57345ffa
-updated: 2017-07-13T11:52:09.433774483+02:00
+hash: 5f7317cd5f84824532ee62afdf779e0cb18bcf090a98bc06630030133078d780
+updated: 2017-07-13T14:41:47.210160707+02:00
 imports:
 - name: github.com/bblfsh/sdk
-  version: b0d6719e25b2fda264c2c2afdc9ae0137a2f7d01
+  version: 9db6b2ee9500857b54f8d40165dc92aba482aadf
   subpackages:
   - protocol
   - uast
@@ -22,7 +22,7 @@ imports:
 - name: github.com/pkg/errors
   version: c605e284fe17294bda444b34710735b29d1a9d90
 - name: github.com/Sirupsen/logrus
-  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
+  version: a3f95b5c423586578a4e099b11a46c2479628cac
 - name: golang.org/x/net
   version: f01ecb60fe3835d80d9a0b7b2bf24b228c89260e
   subpackages:
@@ -49,7 +49,7 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: d2e1b51f33ff8c5e4a15560ff049d200e83726c5
+  version: b15215fb911b24a5d61d57feec4233d610530464
   subpackages:
   - codes
   - credentials
