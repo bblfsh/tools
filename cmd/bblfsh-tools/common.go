@@ -9,8 +9,8 @@ import (
 	"github.com/bblfsh/tools"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/bblfsh/sdk/protocol"
-	"github.com/bblfsh/sdk/uast"
+	"gopkg.in/bblfsh/sdk.v0/protocol"
+	"gopkg.in/bblfsh/sdk.v0/uast"
 	"google.golang.org/grpc"
 	"srcd.works/go-errors.v0"
 )

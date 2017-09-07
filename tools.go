@@ -1,6 +1,6 @@
 package tools
 
-import "github.com/bblfsh/sdk/uast"
+import "gopkg.in/bblfsh/sdk.v0/uast"
 
 // Tooler is an interface which can be implemented by any supported tool.
 // When implemented, the Exec method will be called with a UAST root node.
