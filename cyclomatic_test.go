@@ -3,7 +3,7 @@ package tools
 import (
 	"testing"
 
-	"github.com/bblfsh/sdk/uast"
+	"gopkg.in/bblfsh/sdk.v0/uast"
 	"github.com/stretchr/testify/require"
 )
 

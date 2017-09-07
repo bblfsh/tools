@@ -3,7 +3,7 @@ package tools
 import (
 	"fmt"
 
-	"github.com/bblfsh/sdk/uast"
+	"gopkg.in/bblfsh/sdk.v0/uast"
 )
 
 // CyclomaticComplexity returns the cyclomatic complexity for the node. The cyclomatic complexity

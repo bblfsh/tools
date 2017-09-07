@@ -1,11 +1,6 @@
-hash: 5f7317cd5f84824532ee62afdf779e0cb18bcf090a98bc06630030133078d780
-updated: 2017-07-13T14:41:47.210160707+02:00
+hash: 7721a7245e747257756e7206633e7d71a30d54c88b660ef8bb6a09987bb67105
+updated: 2017-09-07T14:19:27.549782654+02:00
 imports:
-- name: github.com/bblfsh/sdk
-  version: 9db6b2ee9500857b54f8d40165dc92aba482aadf
-  subpackages:
-  - protocol
-  - uast
 - name: github.com/gogo/protobuf
   version: dda3e8acadcc9affc16faf33fbb229db78399245
   subpackages:
@@ -16,13 +11,20 @@ imports:
   version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
   subpackages:
   - proto
+  - ptypes
   - ptypes/any
+  - ptypes/duration
+  - ptypes/timestamp
 - name: github.com/jessevdk/go-flags
-  version: 48cf8722c3375517aba351d1f7577c40663a4407
+  version: 96dc06278ce32a0e9d957d590bb987c81ee66407
 - name: github.com/pkg/errors
-  version: c605e284fe17294bda444b34710735b29d1a9d90
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/Sirupsen/logrus
-  version: a3f95b5c423586578a4e099b11a46c2479628cac
+  version: f006c2ac4710855cf0f916dd6b77acf6b048dc6e
+- name: golang.org/x/crypto
+  version: 81e90905daefcd6fd217b62423c0908922eadb30
+  subpackages:
+  - ssh/terminal
 - name: golang.org/x/net
   version: f01ecb60fe3835d80d9a0b7b2bf24b228c89260e
   subpackages:
@@ -37,6 +39,7 @@ imports:
   version: abf9c25f54453410d0c6668e519582a9e1115027
   subpackages:
   - unix
+  - windows
 - name: golang.org/x/text
   version: cfdf022e86b4ecfb646e1efbd7db175dd623a8fa
   subpackages:
@@ -49,11 +52,12 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: b15215fb911b24a5d61d57feec4233d610530464
+  version: f92cdcd7dcdc69e81b2d7b338479a19a8723cfa3
   subpackages:
   - codes
+  - connectivity
   - credentials
-  - grpclb/grpc_lb_v1
+  - grpclb/grpc_lb_v1/messages
   - grpclog
   - internal
   - keepalive
@@ -64,6 +68,11 @@ imports:
   - status
   - tap
   - transport
+- name: gopkg.in/bblfsh/sdk.v0
+  version: 63a5c96d2d00e2b76932f26459d089e0bcbf5835
+  subpackages:
+  - protocol
+  - uast
 - name: srcd.works/go-errors.v0
   version: 6f07baca276330431b44ece8ee84ac98167bc4ea
 testImports:
