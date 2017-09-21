@@ -14,9 +14,12 @@ import (
 
 // This implementation uses PMD implementation as reference and uses the method of
 // counting one + one of the following UAST Roles if present on any children:
-// If | SwitchCase |  For[Each] | [Do]While | TryCatch | Continue | OpBoolean* | Goto
+// * Statement, If | Case | For | While | DoWhile | Continue
+// * Try, Catch
+// * Operator, Boolean
+// * Goto
 // Important: since some languages allow for code defined
-// outside function definitions, this won't check that the Node has the role FunctionDeclarationRole
+// outside function definitions, this won't check that the Node has the roles Function, Declaration
 // so the user should check that if the intended use is calculating the complexity of a function/method.
 // If the children contain more than one function definitions, the value will not be averaged between
 // the total number of function declarations but given as a total.
@@ -62,17 +65,20 @@ func cyclomaticComplexity(n *uast.Node) int {
 			break
 		}
 		n := p.Node()
+		roles := make(map[uast.Role]bool)
 		for _, r := range n.Roles {
-			if addsComplexity(r) {
-				complexity++
-			}
+			roles[r] = true
+		}
+		if addsComplexity(roles) {
+			complexity++
 		}
 	}
 	return complexity
 }
 
-func addsComplexity(r uast.Role) bool {
-	return r == uast.If || r == uast.SwitchCase || r == uast.For || r == uast.ForEach ||
-		r == uast.DoWhile || r == uast.While || r == uast.TryCatch || r == uast.Continue ||
-		r == uast.OpBooleanAnd || r == uast.OpBooleanOr || r == uast.OpBooleanXor
+func addsComplexity(roles map[uast.Role]bool) bool {
+	return roles[uast.Statement] && (roles[uast.If] || roles[uast.Case] || roles[uast.For] || roles[uast.While] || roles[uast.DoWhile] || roles[uast.Continue]) ||
+		roles[uast.Try] && roles[uast.Catch] ||
+		roles[uast.Operator] && roles[uast.Boolean] ||
+		roles[uast.Goto]
 }
