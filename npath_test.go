@@ -17,30 +17,30 @@ func TestCountChildrenOfRole(t *testing.T) {
 	n1 := &uast.Node{InternalType: "module", Children: []*uast.Node{
 		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}},
 		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}},
-		{InternalType: "If", Roles: []uast.Role{uast.If}},
+		{InternalType: "If", Roles: []uast.Role{uast.Statement, uast.If}},
 	}}
 	n2 := &uast.Node{InternalType: "module", Children: []*uast.Node{
 		{InternalType: "Statement", Roles: []uast.Role{uast.Statement}, Children: []*uast.Node{
 			{InternalType: "Statement", Roles: []uast.Role{uast.Statement}, Children: []*uast.Node{
-				{InternalType: "If", Roles: []uast.Role{uast.If}},
+				{InternalType: "If", Roles: []uast.Role{uast.Statement, uast.If}},
 				{InternalType: "Statemenet", Roles: []uast.Role{uast.Statement}},
 			}},
 		}},
 	}}
-	result := countChildrenOfRole(n1, uast.Statement)
-	expect := 2
+	result := countChildrenOfRoles(n1, []uast.Role{uast.Statement}, nil)
+	expect := 3
 	require.Equal(expect, result)
 
-	result = countChildrenOfRole(n2, uast.Statement)
+	result = countChildrenOfRoles(n2, []uast.Role{uast.Statement}, nil)
 	expect = 1
 	require.Equal(expect, result)
 
-	result = deepCountChildrenOfRole(n1, uast.Statement)
-	expect = 2
+	result = deepCountChildrenOfRoles(n1, []uast.Role{uast.Statement}, nil)
+	expect = 3
 	require.Equal(expect, result)
 
-	result = deepCountChildrenOfRole(n2, uast.Statement)
-	expect = 3
+	result = deepCountChildrenOfRoles(n2, []uast.Role{uast.Statement}, nil)
+	expect = 4
 	require.Equal(expect, result)
 }
 
@@ -61,19 +61,19 @@ func TestChildrenOfRole(t *testing.T) {
 		}},
 	}}
 
-	result := childrenOfRole(n1, uast.Statement)
+	result := childrenOfRoles(n1, []uast.Role{uast.Statement}, nil)
 	expect := 2
 	require.Equal(expect, len(result))
 
-	result = childrenOfRole(n2, uast.Statement)
+	result = childrenOfRoles(n2, []uast.Role{uast.Statement}, nil)
 	expect = 1
 	require.Equal(expect, len(result))
 
-	result = deepChildrenOfRole(n1, uast.Statement)
+	result = deepChildrenOfRoles(n1, []uast.Role{uast.Statement}, nil)
 	expect = 2
 	require.Equal(expect, len(result))
 
-	result = deepChildrenOfRole(n2, uast.Statement)
+	result = deepChildrenOfRoles(n2, []uast.Role{uast.Statement}, nil)
 	expect = 3
 	require.Equal(expect, len(result))
 }
@@ -82,24 +82,24 @@ func TestContainsRole(t *testing.T) {
 	require := require.New(t)
 	n := &uast.Node{InternalType: "node", Roles: []uast.Role{uast.Statement, uast.If}}
 
-	result := containsRole(n, uast.If)
+	result := containsRoles(n, []uast.Role{uast.If}, nil)
 	require.Equal(true, result)
 
-	result = containsRole(n, uast.Switch)
+	result = containsRoles(n, []uast.Role{uast.Switch}, nil)
 	require.Equal(false, result)
 }
 
 func TestExpresionComplex(t *testing.T) {
 	require := require.New(t)
 
-	n := &uast.Node{InternalType: "ifCondition", Roles: []uast.Role{uast.IfCondition}, Children: []*uast.Node{
-		{InternalType: "bool_and", Roles: []uast.Role{uast.OpBooleanAnd}},
-		{InternalType: "bool_xor", Roles: []uast.Role{uast.OpBooleanXor}},
+	n := &uast.Node{InternalType: "ifCondition", Roles: []uast.Role{uast.If, uast.Condition}, Children: []*uast.Node{
+		{InternalType: "bool_and", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.And}},
+		{InternalType: "bool_xor", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.Xor}},
 	}}
-	n2 := &uast.Node{InternalType: "ifCondition", Roles: []uast.Role{uast.IfCondition}, Children: []*uast.Node{
-		{InternalType: "bool_and", Roles: []uast.Role{uast.OpBooleanAnd}, Children: []*uast.Node{
-			{InternalType: "bool_or", Roles: []uast.Role{uast.OpBooleanOr}, Children: []*uast.Node{
-				{InternalType: "bool_xor", Roles: []uast.Role{uast.OpBooleanXor}},
+	n2 := &uast.Node{InternalType: "ifCondition", Roles: []uast.Role{uast.If, uast.Condition}, Children: []*uast.Node{
+		{InternalType: "bool_and", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.And}, Children: []*uast.Node{
+			{InternalType: "bool_or", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.Or}, Children: []*uast.Node{
+				{InternalType: "bool_xor", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.Xor}},
 			}},
 		}},
 	}}
@@ -118,17 +118,18 @@ func TestNPathComplexity(t *testing.T) {
 	var result []int
 	var expect []int
 
-	andBool := &uast.Node{InternalType: "bool_and", Roles: []uast.Role{uast.OpBooleanAnd}}
-	orBool := &uast.Node{InternalType: "bool_or", Roles: []uast.Role{uast.OpBooleanOr}}
+	andBool := &uast.Node{InternalType: "bool_and", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.And}}
+	orBool := &uast.Node{InternalType: "bool_or", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.Or}}
 	statement := &uast.Node{InternalType: "Statement", Roles: []uast.Role{uast.Statement}}
 
-	n := &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n := &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		statement,
 	}}
 
 	npathData := NPathComplexity(n)
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 1)
+
 	/*
 			if(3conditions){
 				Statement
@@ -141,66 +142,32 @@ func TestNPathComplexity(t *testing.T) {
 				Statement
 		  } Npath = 7
 	*/
-	ifCondition := &uast.Node{InternalType: "Condition", Roles: []uast.Role{uast.IfCondition}, Children: []*uast.Node{
+	ifCondition := &uast.Node{InternalType: "Condition", Roles: []uast.Role{uast.If, uast.Condition}, Children: []*uast.Node{
 		andBool,
 		orBool,
 	}}
-	ifBody := &uast.Node{InternalType: "Body", Roles: []uast.Role{uast.IfBody}, Children: []*uast.Node{
+	ifBody := &uast.Node{InternalType: "Body", Roles: []uast.Role{uast.If, uast.Then}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	elseIf := &uast.Node{InternalType: "elseIf", Roles: []uast.Role{uast.IfElse}, Children: []*uast.Node{
-		&uast.Node{InternalType: "If", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+	elseIf := &uast.Node{InternalType: "elseIf", Roles: []uast.Role{uast.If, uast.Else}, Children: []*uast.Node{
+		&uast.Node{InternalType: "If", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 			ifCondition,
 			ifBody,
 		}},
 	}}
-	ifElse := &uast.Node{InternalType: "else", Roles: []uast.Role{uast.IfElse}, Children: []*uast.Node{
+	ifElse := &uast.Node{InternalType: "else", Roles: []uast.Role{uast.If, uast.Else}, Children: []*uast.Node{
 		ifBody,
 	}}
-	nIf := &uast.Node{InternalType: "if", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+	nIf := &uast.Node{InternalType: "if", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 		ifCondition,
 		ifBody,
 		elseIf,
 		ifElse,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nIf,
-	}}
-
-	npathData = NPathComplexity(n)
-	result = append(result, npathData[0].Complexity)
-	expect = append(expect, 7)
-
-	// This case looks like the previous one, but we have the ElseIF and the If Roles in the same uast.Node
-	/*
-		if(3conditions){
-			Statement
-			Statement
-		}else if(3conditions){
-			Statement
-			Statement
-		}else{
-			Statement
-			Statement
-		} Npath = 7
-	*/
-
-	elseIf2Roles := &uast.Node{InternalType: "elseIf", Roles: []uast.Role{uast.IfElse, uast.If}, Children: []*uast.Node{
-		ifCondition,
-		ifBody,
-	}}
-
-	nIf2Roles := &uast.Node{InternalType: "if", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
-		ifCondition,
-		ifBody,
-		elseIf2Roles,
-		ifElse,
-	}}
-
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
-		nIf2Roles,
 	}}
 
 	npathData = NPathComplexity(n)
@@ -213,12 +180,12 @@ func TestNPathComplexity(t *testing.T) {
 	    Statement
 	  }Npath = 2
 	*/
-	nSimpleIf := &uast.Node{InternalType: "If", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
-		{InternalType: "ifCondition", Roles: []uast.Role{uast.IfCondition}, Children: []*uast.Node{}},
+	nSimpleIf := &uast.Node{InternalType: "If", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
+		{InternalType: "ifCondition", Roles: []uast.Role{uast.If, uast.Condition}, Children: []*uast.Node{}},
 		ifBody,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nSimpleIf,
 	}}
 
@@ -232,7 +199,7 @@ func TestNPathComplexity(t *testing.T) {
 		Npath = 343
 	*/
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nIf,
 		nIf,
 		nIf,
@@ -255,11 +222,11 @@ func TestNPathComplexity(t *testing.T) {
 			}
 		} Npath = 10
 	*/
-	nestedIfBody := &uast.Node{InternalType: "bodyº", Roles: []uast.Role{uast.IfBody}, Children: []*uast.Node{
-		{InternalType: "if2", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+	nestedIfBody := &uast.Node{InternalType: "body", Roles: []uast.Role{uast.If, uast.Then}, Children: []*uast.Node{
+		{InternalType: "if2", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 			ifCondition,
-			{InternalType: "body2", Roles: []uast.Role{uast.IfBody}, Children: []*uast.Node{
-				{InternalType: "if3", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+			{InternalType: "body2", Roles: []uast.Role{uast.If, uast.Then}, Children: []*uast.Node{
+				{InternalType: "if3", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 					ifCondition,
 					ifBody,
 					ifElse,
@@ -267,12 +234,12 @@ func TestNPathComplexity(t *testing.T) {
 			}},
 		}},
 	}}
-	nNestedIf := &uast.Node{InternalType: "if1", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+	nNestedIf := &uast.Node{InternalType: "if1", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 		ifCondition,
 		nestedIfBody,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nNestedIf,
 	}}
 
@@ -290,25 +257,25 @@ func TestNPathComplexity(t *testing.T) {
 			Statement
 		} Npath = 3
 	*/
-	whileCondition := &uast.Node{InternalType: "WhileCondition", Roles: []uast.Role{uast.WhileCondition}, Children: []*uast.Node{
+	whileCondition := &uast.Node{InternalType: "WhileCondition", Roles: []uast.Role{uast.While, uast.Condition}, Children: []*uast.Node{
 		andBool,
 	}}
-	whileBody := &uast.Node{InternalType: "WhileBody", Roles: []uast.Role{uast.WhileBody}, Children: []*uast.Node{
+	whileBody := &uast.Node{InternalType: "WhileBody", Roles: []uast.Role{uast.While, uast.Body}, Children: []*uast.Node{
 		statement,
 		statement,
 		statement,
 	}}
-	whileElse := &uast.Node{InternalType: "WhileElse", Roles: []uast.Role{uast.IfElse}, Children: []*uast.Node{
+	whileElse := &uast.Node{InternalType: "WhileElse", Roles: []uast.Role{uast.While, uast.Else}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	nWhile := &uast.Node{InternalType: "While", Roles: []uast.Role{uast.While}, Children: []*uast.Node{
+	nWhile := &uast.Node{InternalType: "While", Roles: []uast.Role{uast.Statement, uast.While}, Children: []*uast.Node{
 		whileCondition,
 		whileBody,
 		whileElse,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nWhile,
 	}}
 
@@ -326,23 +293,23 @@ func TestNPathComplexity(t *testing.T) {
 			}
 		} Npath = 7
 	*/
-	nestedWhileBody := &uast.Node{InternalType: "WhileBody1", Roles: []uast.Role{uast.WhileBody}, Children: []*uast.Node{
-		{InternalType: "While2", Roles: []uast.Role{uast.While}, Children: []*uast.Node{
+	nestedWhileBody := &uast.Node{InternalType: "WhileBody1", Roles: []uast.Role{uast.While, uast.Body}, Children: []*uast.Node{
+		{InternalType: "While2", Roles: []uast.Role{uast.Statement, uast.While}, Children: []*uast.Node{
 			whileCondition,
-			{InternalType: "WhileBody2", Roles: []uast.Role{uast.WhileBody}, Children: []*uast.Node{
-				{InternalType: "While3", Roles: []uast.Role{uast.While}, Children: []*uast.Node{
+			{InternalType: "WhileBody2", Roles: []uast.Role{uast.While, uast.Body}, Children: []*uast.Node{
+				{InternalType: "While3", Roles: []uast.Role{uast.Statement, uast.While}, Children: []*uast.Node{
 					whileCondition,
 					whileBody,
 				}},
 			}},
 		}},
 	}}
-	nNestedWhile := &uast.Node{InternalType: "While1", Roles: []uast.Role{uast.While}, Children: []*uast.Node{
+	nNestedWhile := &uast.Node{InternalType: "While1", Roles: []uast.Role{uast.Statement, uast.While}, Children: []*uast.Node{
 		whileCondition,
 		nestedWhileBody,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nNestedWhile,
 	}}
 
@@ -356,23 +323,23 @@ func TestNPathComplexity(t *testing.T) {
 				Statement
 		 	 } Npath = 2
 	*/
-	forCondition := &uast.Node{InternalType: "forCondition", Roles: []uast.Role{uast.ForExpression}, Children: []*uast.Node{
+	forCondition := &uast.Node{InternalType: "forCondition", Roles: []uast.Role{uast.For, uast.Expression}, Children: []*uast.Node{
 		orBool,
 	}}
-	forInit := &uast.Node{InternalType: "forInit", Roles: []uast.Role{uast.ForInit}}
-	forUpdate := &uast.Node{InternalType: "forUpdate", Roles: []uast.Role{uast.ForUpdate}}
-	forBody := &uast.Node{InternalType: "forBody", Roles: []uast.Role{uast.ForBody}, Children: []*uast.Node{
+	forInit := &uast.Node{InternalType: "forInit", Roles: []uast.Role{uast.For, uast.Initialization}}
+	forUpdate := &uast.Node{InternalType: "forUpdate", Roles: []uast.Role{uast.For, uast.Update}}
+	forBody := &uast.Node{InternalType: "forBody", Roles: []uast.Role{uast.For, uast.Body}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	nFor := &uast.Node{InternalType: "for", Roles: []uast.Role{uast.For}, Children: []*uast.Node{
+	nFor := &uast.Node{InternalType: "for", Roles: []uast.Role{uast.Statement, uast.For}, Children: []*uast.Node{
 		forInit,
 		forCondition,
 		forUpdate,
 		forBody,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nFor,
 	}}
 
@@ -390,13 +357,13 @@ func TestNPathComplexity(t *testing.T) {
 			}
 		} Npath = 4
 	*/
-	nestedForBody := &uast.Node{InternalType: "forBody1", Roles: []uast.Role{uast.ForBody}, Children: []*uast.Node{
-		{InternalType: "for2", Roles: []uast.Role{uast.For}, Children: []*uast.Node{
+	nestedForBody := &uast.Node{InternalType: "forBody1", Roles: []uast.Role{uast.For, uast.Body}, Children: []*uast.Node{
+		{InternalType: "for2", Roles: []uast.Role{uast.Statement, uast.For}, Children: []*uast.Node{
 			forInit,
 			forCondition,
 			forUpdate,
-			{InternalType: "forBody2", Roles: []uast.Role{uast.ForBody}, Children: []*uast.Node{
-				{InternalType: "for3", Roles: []uast.Role{uast.For}, Children: []*uast.Node{
+			{InternalType: "forBody2", Roles: []uast.Role{uast.For, uast.Body}, Children: []*uast.Node{
+				{InternalType: "for3", Roles: []uast.Role{uast.Statement, uast.For}, Children: []*uast.Node{
 					forInit,
 					forCondition,
 					forUpdate,
@@ -405,14 +372,14 @@ func TestNPathComplexity(t *testing.T) {
 			}},
 		}},
 	}}
-	nNestedFor := &uast.Node{InternalType: "for1", Roles: []uast.Role{uast.For}, Children: []*uast.Node{
+	nNestedFor := &uast.Node{InternalType: "for1", Roles: []uast.Role{uast.Statement, uast.For}, Children: []*uast.Node{
 		forInit,
 		forCondition,
 		forUpdate,
 		nestedForBody,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nNestedFor,
 	}}
 
@@ -427,19 +394,19 @@ func TestNPathComplexity(t *testing.T) {
 		}while(3conditions)
 		Npath = 4
 	*/
-	doWhileCondition := &uast.Node{InternalType: "doWhileCondition", Roles: []uast.Role{uast.DoWhileCondition}, Children: []*uast.Node{
+	doWhileCondition := &uast.Node{InternalType: "doWhileCondition", Roles: []uast.Role{uast.DoWhile, uast.Condition}, Children: []*uast.Node{
 		orBool,
 		orBool,
 	}}
-	doWhileBody := &uast.Node{InternalType: "doWhileBody", Roles: []uast.Role{uast.DoWhileBody}, Children: []*uast.Node{
+	doWhileBody := &uast.Node{InternalType: "doWhileBody", Roles: []uast.Role{uast.DoWhile, uast.Body}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	nDoWhile := &uast.Node{InternalType: "doWhile", Roles: []uast.Role{uast.DoWhile}, Children: []*uast.Node{
+	nDoWhile := &uast.Node{InternalType: "doWhile", Roles: []uast.Role{uast.Statement, uast.DoWhile}, Children: []*uast.Node{
 		doWhileBody,
 		doWhileCondition,
 	}}
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nDoWhile,
 	}}
 
@@ -458,10 +425,10 @@ func TestNPathComplexity(t *testing.T) {
 		}while(3condtions)
 		Npath = 10
 	*/
-	nestedDoWhileBody := &uast.Node{InternalType: "doWhileBody1", Roles: []uast.Role{uast.DoWhileBody}, Children: []*uast.Node{
-		{InternalType: "doWhile2", Roles: []uast.Role{uast.DoWhile}, Children: []*uast.Node{
-			{InternalType: "doWhileBody2", Roles: []uast.Role{uast.DoWhileBody}, Children: []*uast.Node{
-				{InternalType: "doWhile3", Roles: []uast.Role{uast.DoWhile}, Children: []*uast.Node{
+	nestedDoWhileBody := &uast.Node{InternalType: "doWhileBody1", Roles: []uast.Role{uast.DoWhile, uast.Body}, Children: []*uast.Node{
+		{InternalType: "doWhile2", Roles: []uast.Role{uast.Statement, uast.DoWhile}, Children: []*uast.Node{
+			{InternalType: "doWhileBody2", Roles: []uast.Role{uast.DoWhile, uast.Body}, Children: []*uast.Node{
+				{InternalType: "doWhile3", Roles: []uast.Role{uast.Statement, uast.DoWhile}, Children: []*uast.Node{
 					doWhileBody,
 					doWhileCondition,
 				}},
@@ -469,11 +436,11 @@ func TestNPathComplexity(t *testing.T) {
 			doWhileCondition,
 		}},
 	}}
-	nNestedDoWhile := &uast.Node{InternalType: "doWhile1", Roles: []uast.Role{uast.DoWhile}, Children: []*uast.Node{
+	nNestedDoWhile := &uast.Node{InternalType: "doWhile1", Roles: []uast.Role{uast.Statement, uast.DoWhile}, Children: []*uast.Node{
 		nestedDoWhileBody,
 		doWhileCondition,
 	}}
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nNestedDoWhile,
 	}}
 
@@ -494,29 +461,29 @@ func TestNPathComplexity(t *testing.T) {
 			Statement
 		} Npath = 3
 	*/
-	switchCondition := &uast.Node{InternalType: "switchCondition", Roles: []uast.Role{uast.SwitchCaseCondition}, Children: []*uast.Node{
+	switchCondition := &uast.Node{InternalType: "switchCondition", Roles: []uast.Role{uast.Switch, uast.Case, uast.Condition}, Children: []*uast.Node{
 		orBool,
 		andBool,
 	}}
-	switchCaseBody := &uast.Node{InternalType: "switchCaseBody", Roles: []uast.Role{uast.SwitchCaseBody}, Children: []*uast.Node{
+	switchCaseBody := &uast.Node{InternalType: "switchCaseBody", Roles: []uast.Role{uast.Switch, uast.Case, uast.Body}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	switchCase := &uast.Node{InternalType: "switchCase", Roles: []uast.Role{uast.SwitchCase}, Children: []*uast.Node{
+	switchCase := &uast.Node{InternalType: "switchCase", Roles: []uast.Role{uast.Statement, uast.Switch, uast.Case}, Children: []*uast.Node{
 		switchCondition,
 	}}
-	defaultCase := &uast.Node{InternalType: "defaultCase", Roles: []uast.Role{uast.SwitchDefault}, Children: []*uast.Node{
+	defaultCase := &uast.Node{InternalType: "defaultCase", Roles: []uast.Role{uast.Switch, uast.Default}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	nSwitch := &uast.Node{InternalType: "switch", Roles: []uast.Role{uast.Switch}, Children: []*uast.Node{
+	nSwitch := &uast.Node{InternalType: "switch", Roles: []uast.Role{uast.Statement, uast.Switch}, Children: []*uast.Node{
 		switchCase,
 		switchCaseBody,
 		switchCase,
 		switchCaseBody,
 		defaultCase,
 	}}
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nSwitch,
 	}}
 
@@ -545,10 +512,10 @@ func TestNPathComplexity(t *testing.T) {
 				Statement
 		} Npath = 9
 	*/
-	nestedDefaultCase := &uast.Node{InternalType: "defaultCase", Roles: []uast.Role{uast.SwitchDefault}, Children: []*uast.Node{
+	nestedDefaultCase := &uast.Node{InternalType: "defaultCase", Roles: []uast.Role{uast.Switch, uast.Default}, Children: []*uast.Node{
 		nSwitch,
 	}}
-	nNestedSwitch := &uast.Node{InternalType: "switch", Roles: []uast.Role{uast.Switch}, Children: []*uast.Node{
+	nNestedSwitch := &uast.Node{InternalType: "switch", Roles: []uast.Role{uast.Statement, uast.Switch}, Children: []*uast.Node{
 		switchCase,
 		switchCaseBody,
 		switchCase,
@@ -556,7 +523,7 @@ func TestNPathComplexity(t *testing.T) {
 		nestedDefaultCase,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nNestedSwitch,
 	}}
 
@@ -567,8 +534,8 @@ func TestNPathComplexity(t *testing.T) {
 	/*
 		return
 	*/
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
-		{InternalType: "Return", Roles: []uast.Role{uast.Return}},
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
+		{InternalType: "Return", Roles: []uast.Role{uast.Statement, uast.Return}},
 	}}
 
 	npathData = NPathComplexity(n)
@@ -580,11 +547,11 @@ func TestNPathComplexity(t *testing.T) {
 		statement
 		return 3condition
 	*/
-	nReturn := &uast.Node{InternalType: "Return", Roles: []uast.Role{uast.Return}, Children: []*uast.Node{
+	nReturn := &uast.Node{InternalType: "Return", Roles: []uast.Role{uast.Statement, uast.Return}, Children: []*uast.Node{
 		orBool,
 		andBool,
 	}}
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		statement,
 		statement,
 		nReturn,
@@ -594,13 +561,13 @@ func TestNPathComplexity(t *testing.T) {
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
-	nForEach := &uast.Node{InternalType: "ForEach", Roles: []uast.Role{uast.ForEach}, Children: []*uast.Node{
+	nForEach := &uast.Node{InternalType: "ForEach", Roles: []uast.Role{uast.Statement, uast.For, uast.Iterator}, Children: []*uast.Node{
 		forInit,
 		forCondition,
 		forBody,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nForEach,
 	}}
 
@@ -608,22 +575,22 @@ func TestNPathComplexity(t *testing.T) {
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
-	tryBody := &uast.Node{InternalType: "TryBody", Roles: []uast.Role{uast.TryBody}, Children: []*uast.Node{
+	tryBody := &uast.Node{InternalType: "TryBody", Roles: []uast.Role{uast.Try, uast.Body}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
 
-	tryCatch := &uast.Node{InternalType: "TryCatch", Roles: []uast.Role{uast.TryCatch}, Children: []*uast.Node{
+	tryCatch := &uast.Node{InternalType: "TryCatch", Roles: []uast.Role{uast.Try, uast.Catch}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
 
-	nTry := &uast.Node{InternalType: "Try", Roles: []uast.Role{uast.Try}, Children: []*uast.Node{
+	nTry := &uast.Node{InternalType: "Try", Roles: []uast.Role{uast.Statement, uast.Try}, Children: []*uast.Node{
 		tryBody,
 		tryCatch,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nTry,
 	}}
 
@@ -631,10 +598,10 @@ func TestNPathComplexity(t *testing.T) {
 	result = append(result, npathData[0].Complexity)
 	expect = append(expect, 2)
 
-	tryFinally := &uast.Node{InternalType: "TryFinally", Roles: []uast.Role{uast.TryFinally}, Children: []*uast.Node{
+	tryFinally := &uast.Node{InternalType: "TryFinally", Roles: []uast.Role{uast.Try, uast.Finally}, Children: []*uast.Node{
 		nSimpleIf,
 	}}
-	nTryFinally := &uast.Node{InternalType: "Try", Roles: []uast.Role{uast.Try}, Children: []*uast.Node{
+	nTryFinally := &uast.Node{InternalType: "Try", Roles: []uast.Role{uast.Statement, uast.Try}, Children: []*uast.Node{
 		tryBody,
 		tryCatch,
 		tryCatch,
@@ -642,7 +609,7 @@ func TestNPathComplexity(t *testing.T) {
 		tryFinally,
 	}}
 
-	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{
+	n = &uast.Node{InternalType: "Function declaration body", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{
 		nTryFinally,
 	}}
 
@@ -657,45 +624,45 @@ func TestNpathMultiFunc(t *testing.T) {
 	require := require.New(t)
 	var result []int
 	expect := []int{7, 7, 7}
-	andBool := &uast.Node{InternalType: "bool_and", Roles: []uast.Role{uast.OpBooleanAnd}}
-	orBool := &uast.Node{InternalType: "bool_or", Roles: []uast.Role{uast.OpBooleanOr}}
+	andBool := &uast.Node{InternalType: "bool_and", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.And}}
+	orBool := &uast.Node{InternalType: "bool_or", Roles: []uast.Role{uast.Operator, uast.Boolean, uast.Or}}
 	statement := &uast.Node{InternalType: "Statement", Roles: []uast.Role{uast.Statement}}
 
-	ifCondition := &uast.Node{InternalType: "Condition", Roles: []uast.Role{uast.IfCondition}, Children: []*uast.Node{
+	ifCondition := &uast.Node{InternalType: "Condition", Roles: []uast.Role{uast.If, uast.Condition}, Children: []*uast.Node{
 		andBool,
 		orBool,
 	}}
-	ifBody := &uast.Node{InternalType: "Body", Roles: []uast.Role{uast.IfBody}, Children: []*uast.Node{
+	ifBody := &uast.Node{InternalType: "Body", Roles: []uast.Role{uast.If, uast.Then}, Children: []*uast.Node{
 		statement,
 		statement,
 	}}
-	elseIf := &uast.Node{InternalType: "elseIf", Roles: []uast.Role{uast.IfElse}, Children: []*uast.Node{
-		&uast.Node{InternalType: "If", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+	elseIf := &uast.Node{InternalType: "elseIf", Roles: []uast.Role{uast.If, uast.Else}, Children: []*uast.Node{
+		&uast.Node{InternalType: "If", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 			ifCondition,
 			ifBody,
 		}},
 	}}
-	ifElse := &uast.Node{InternalType: "else", Roles: []uast.Role{uast.IfElse}, Children: []*uast.Node{
+	ifElse := &uast.Node{InternalType: "else", Roles: []uast.Role{uast.If, uast.Else}, Children: []*uast.Node{
 		ifBody,
 	}}
-	nIf := &uast.Node{InternalType: "if", Roles: []uast.Role{uast.If}, Children: []*uast.Node{
+	nIf := &uast.Node{InternalType: "if", Roles: []uast.Role{uast.Statement, uast.If}, Children: []*uast.Node{
 		ifCondition,
 		ifBody,
 		elseIf,
 		ifElse,
 	}}
-	funcBody := &uast.Node{InternalType: "funcBody", Roles: []uast.Role{uast.FunctionDeclarationBody}, Children: []*uast.Node{nIf}}
+	funcBody := &uast.Node{InternalType: "funcBody", Roles: []uast.Role{uast.Function, uast.Body}, Children: []*uast.Node{nIf}}
 
-	func1 := &uast.Node{InternalType: "func1", Roles: []uast.Role{uast.FunctionDeclaration}, Children: []*uast.Node{
-		&uast.Node{InternalType: "funcName1", Roles: []uast.Role{uast.FunctionDeclarationName}, Children: []*uast.Node{}, Token: "Name1"},
+	func1 := &uast.Node{InternalType: "func1", Roles: []uast.Role{uast.Function, uast.Declaration}, Children: []*uast.Node{
+		&uast.Node{InternalType: "funcName1", Roles: []uast.Role{uast.Function, uast.Name}, Children: []*uast.Node{}, Token: "Name1"},
 		funcBody,
 	}}
-	func2 := &uast.Node{InternalType: "func2", Roles: []uast.Role{uast.FunctionDeclaration}, Children: []*uast.Node{
-		&uast.Node{InternalType: "funcName2", Roles: []uast.Role{uast.FunctionDeclarationName}, Children: []*uast.Node{}, Token: "Name2"},
+	func2 := &uast.Node{InternalType: "func2", Roles: []uast.Role{uast.Function, uast.Declaration}, Children: []*uast.Node{
+		&uast.Node{InternalType: "funcName2", Roles: []uast.Role{uast.Function, uast.Name}, Children: []*uast.Node{}, Token: "Name2"},
 		funcBody,
 	}}
-	func3 := &uast.Node{InternalType: "func3", Roles: []uast.Role{uast.FunctionDeclaration}, Children: []*uast.Node{
-		&uast.Node{InternalType: "funcName3", Roles: []uast.Role{uast.FunctionDeclarationName}, Children: []*uast.Node{}, Token: "Name3"},
+	func3 := &uast.Node{InternalType: "func3", Roles: []uast.Role{uast.Function, uast.Declaration}, Children: []*uast.Node{
+		&uast.Node{InternalType: "funcName3", Roles: []uast.Role{uast.Function, uast.Name}, Children: []*uast.Node{}, Token: "Name3"},
 		funcBody,
 	}}
 
