@@ -1,6 +1,6 @@
 package tools
 
-import "gopkg.in/bblfsh/sdk.v0/uast"
+import "gopkg.in/bblfsh/sdk.v1/uast"
 
 type Tokenizer struct{}
 

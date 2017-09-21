@@ -3,7 +3,7 @@ package tools
 import (
 	"fmt"
 
-	"gopkg.in/bblfsh/sdk.v0/uast"
+	"gopkg.in/bblfsh/sdk.v1/uast"
 )
 
 type NPath struct{}

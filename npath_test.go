@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
-	"gopkg.in/bblfsh/sdk.v0/protocol"
-	"gopkg.in/bblfsh/sdk.v0/uast"
 	"github.com/stretchr/testify/require"
+	"gopkg.in/bblfsh/sdk.v1/protocol"
+	"gopkg.in/bblfsh/sdk.v1/uast"
 )
 
 func TestCountChildrenOfRole(t *testing.T) {
