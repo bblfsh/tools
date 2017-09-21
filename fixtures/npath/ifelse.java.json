@@ -20,9 +20,15 @@
                         "StartPosition": {
                             "Offset": 6,
                             "Line": 1,
-                            "Col": 0
+                            "Col": 7
+                        },
+                        "EndPosition": {
+                            "Offset": 10,
+                            "Line": 1,
+                            "Col": 11
                         },
                         "Roles": [
+                            18,
                             1
                         ]
                     },
@@ -42,8 +48,17 @@
                                 "StartPosition": {
                                     "Offset": 14,
                                     "Line": 2,
-                                    "Col": 0
-                                }
+                                    "Col": 2
+                                },
+                                "EndPosition": {
+                                    "Offset": 18,
+                                    "Line": 2,
+                                    "Col": 6
+                                },
+                                "Roles": [
+                                    101,
+                                    104
+                                ]
                             },
                             {
                                 "InternalType": "SimpleName",
@@ -54,11 +69,18 @@
                                 "StartPosition": {
                                     "Offset": 19,
                                     "Line": 2,
-                                    "Col": 0
+                                    "Col": 7
+                                },
+                                "EndPosition": {
+                                    "Offset": 23,
+                                    "Line": 2,
+                                    "Col": 11
                                 },
                                 "Roles": [
+                                    18,
                                     1,
-                                    52
+                                    45,
+                                    47
                                 ]
                             },
                             {
@@ -82,11 +104,19 @@
                                                 "StartPosition": {
                                                     "Offset": 37,
                                                     "Line": 3,
-                                                    "Col": 0
+                                                    "Col": 10
+                                                },
+                                                "EndPosition": {
+                                                    "Offset": 41,
+                                                    "Line": 3,
+                                                    "Col": 14
                                                 },
                                                 "Roles": [
-                                                    111,
-                                                    71
+                                                    18,
+                                                    89,
+                                                    11,
+                                                    61,
+                                                    62
                                                 ]
                                             },
                                             {
@@ -122,9 +152,15 @@
                                                                                 "StartPosition": {
                                                                                     "Offset": 57,
                                                                                     "Line": 4,
-                                                                                    "Col": 0
+                                                                                    "Col": 13
+                                                                                },
+                                                                                "EndPosition": {
+                                                                                    "Offset": 63,
+                                                                                    "Line": 4,
+                                                                                    "Col": 19
                                                                                 },
                                                                                 "Roles": [
+                                                                                    18,
                                                                                     1
                                                                                 ]
                                                                             },
@@ -137,16 +173,25 @@
                                                                                 "StartPosition": {
                                                                                     "Offset": 64,
                                                                                     "Line": 4,
-                                                                                    "Col": 0
+                                                                                    "Col": 20
+                                                                                },
+                                                                                "EndPosition": {
+                                                                                    "Offset": 67,
+                                                                                    "Line": 4,
+                                                                                    "Col": 23
                                                                                 },
                                                                                 "Roles": [
+                                                                                    18,
                                                                                     1
                                                                                 ]
                                                                             }
                                                                         ],
                                                                         "Roles": [
+                                                                            18,
+                                                                            1,
                                                                             2,
-                                                                            104
+                                                                            85,
+                                                                            48
                                                                         ]
                                                                     },
                                                                     {
@@ -158,11 +203,18 @@
                                                                         "StartPosition": {
                                                                             "Offset": 68,
                                                                             "Line": 4,
-                                                                            "Col": 0
+                                                                            "Col": 24
+                                                                        },
+                                                                        "EndPosition": {
+                                                                            "Offset": 75,
+                                                                            "Line": 4,
+                                                                            "Col": 31
                                                                         },
                                                                         "Roles": [
+                                                                            18,
                                                                             1,
-                                                                            105
+                                                                            85,
+                                                                            86
                                                                         ]
                                                                     },
                                                                     {
@@ -174,28 +226,41 @@
                                                                         "StartPosition": {
                                                                             "Offset": 76,
                                                                             "Line": 4,
-                                                                            "Col": 0
+                                                                            "Col": 32
+                                                                        },
+                                                                        "EndPosition": {
+                                                                            "Offset": 80,
+                                                                            "Line": 4,
+                                                                            "Col": 36
                                                                         },
                                                                         "Roles": [
-                                                                            111,
-                                                                            106
+                                                                            18,
+                                                                            89,
+                                                                            11,
+                                                                            85,
+                                                                            49,
+                                                                            87
                                                                         ]
                                                                     }
                                                                 ],
                                                                 "Roles": [
-                                                                    103
+                                                                    18,
+                                                                    85
                                                                 ]
                                                             }
                                                         ],
                                                         "Roles": [
-                                                            16
+                                                            19
                                                         ]
                                                     }
                                                 ],
                                                 "Roles": [
-                                                    72,
-                                                    95,
-                                                    94
+                                                    61,
+                                                    63,
+                                                    46,
+                                                    19,
+                                                    77,
+                                                    78
                                                 ]
                                             },
                                             {
@@ -231,9 +296,15 @@
                                                                                 "StartPosition": {
                                                                                     "Offset": 106,
                                                                                     "Line": 6,
-                                                                                    "Col": 0
+                                                                                    "Col": 10
+                                                                                },
+                                                                                "EndPosition": {
+                                                                                    "Offset": 112,
+                                                                                    "Line": 6,
+                                                                                    "Col": 16
                                                                                 },
                                                                                 "Roles": [
+                                                                                    18,
                                                                                     1
                                                                                 ]
                                                                             },
@@ -246,16 +317,25 @@
                                                                                 "StartPosition": {
                                                                                     "Offset": 113,
                                                                                     "Line": 6,
-                                                                                    "Col": 0
+                                                                                    "Col": 17
+                                                                                },
+                                                                                "EndPosition": {
+                                                                                    "Offset": 116,
+                                                                                    "Line": 6,
+                                                                                    "Col": 20
                                                                                 },
                                                                                 "Roles": [
+                                                                                    18,
                                                                                     1
                                                                                 ]
                                                                             }
                                                                         ],
                                                                         "Roles": [
+                                                                            18,
+                                                                            1,
                                                                             2,
-                                                                            104
+                                                                            85,
+                                                                            48
                                                                         ]
                                                                     },
                                                                     {
@@ -267,11 +347,18 @@
                                                                         "StartPosition": {
                                                                             "Offset": 117,
                                                                             "Line": 6,
-                                                                            "Col": 0
+                                                                            "Col": 21
+                                                                        },
+                                                                        "EndPosition": {
+                                                                            "Offset": 124,
+                                                                            "Line": 6,
+                                                                            "Col": 28
                                                                         },
                                                                         "Roles": [
+                                                                            18,
                                                                             1,
-                                                                            105
+                                                                            85,
+                                                                            86
                                                                         ]
                                                                     },
                                                                     {
@@ -283,68 +370,98 @@
                                                                         "StartPosition": {
                                                                             "Offset": 125,
                                                                             "Line": 6,
-                                                                            "Col": 0
+                                                                            "Col": 29
+                                                                        },
+                                                                        "EndPosition": {
+                                                                            "Offset": 130,
+                                                                            "Line": 6,
+                                                                            "Col": 34
                                                                         },
                                                                         "Roles": [
-                                                                            111,
-                                                                            106
+                                                                            18,
+                                                                            89,
+                                                                            11,
+                                                                            85,
+                                                                            49,
+                                                                            87
                                                                         ]
                                                                     }
                                                                 ],
                                                                 "Roles": [
-                                                                    103
+                                                                    18,
+                                                                    85
                                                                 ]
                                                             }
                                                         ],
                                                         "Roles": [
-                                                            16
+                                                            19
                                                         ]
                                                     }
                                                 ],
                                                 "Roles": [
-                                                    95,
-                                                    94
+                                                    61,
+                                                    64,
+                                                    46,
+                                                    19,
+                                                    77,
+                                                    78
                                                 ]
                                             }
                                         ],
                                         "Token": "if",
                                         "Roles": [
-                                            70,
-                                            16
+                                            19,
+                                            61
                                         ]
                                     }
                                 ],
                                 "Roles": [
-                                    51,
-                                    95,
-                                    94
+                                    45,
+                                    46,
+                                    19,
+                                    77,
+                                    78
                                 ]
                             }
                         ],
                         "StartPosition": {
                             "Offset": 14,
                             "Line": 2,
-                            "Col": 0
+                            "Col": 2
+                        },
+                        "EndPosition": {
+                            "Offset": 142,
+                            "Line": 8,
+                            "Col": 3
                         },
                         "Roles": [
-                            65,
-                            50
+                            56,
+                            40,
+                            41,
+                            45
                         ]
                     }
                 ],
                 "StartPosition": {
                     "Offset": 0,
                     "Line": 1,
-                    "Col": 0
+                    "Col": 1
+                },
+                "EndPosition": {
+                    "Offset": 144,
+                    "Line": 9,
+                    "Col": 2
                 },
                 "Roles": [
-                    65,
-                    58
+                    56,
+                    40,
+                    41,
+                    101
                 ]
             }
         ],
         "Roles": [
-            36
+            34
         ]
     }
 }

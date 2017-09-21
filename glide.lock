@@ -1,5 +1,5 @@
-hash: 7721a7245e747257756e7206633e7d71a30d54c88b660ef8bb6a09987bb67105
-updated: 2017-09-07T14:19:27.549782654+02:00
+hash: bf4929beb06f0abdf5b2602ede39c3b64cf5d8e0b9a5bd0e39aaad00db4e165c
+updated: 2017-09-21T19:09:34.563949343+02:00
 imports:
 - name: github.com/gogo/protobuf
   version: dda3e8acadcc9affc16faf33fbb229db78399245
@@ -68,12 +68,12 @@ imports:
   - status
   - tap
   - transport
-- name: gopkg.in/bblfsh/sdk.v0
-  version: 63a5c96d2d00e2b76932f26459d089e0bcbf5835
+- name: gopkg.in/bblfsh/sdk.v1
+  version: 5fb8c6896ed650c884417d7a3d8af051a15b32c5
   subpackages:
   - protocol
   - uast
-- name: srcd.works/go-errors.v0
+- name: gopkg.in/src-d/go-errors.v0
   version: 6f07baca276330431b44ece8ee84ac98167bc4ea
 testImports:
 - name: github.com/davecgh/go-spew

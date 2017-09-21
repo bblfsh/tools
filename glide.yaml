@@ -6,10 +6,8 @@ import:
   version: ^1.2.0
 - package: google.golang.org/grpc
   version: ^1.4.2
-- package: gopkg.in/bblfsh/sdk.v0
-  version: ^0.2.1
-- package: srcd.works/go-errors.v0
-  version: 6f07baca276330431b44ece8ee84ac98167bc4ea
+- package: gopkg.in/bblfsh/sdk.v1
+  version: ^1.0.0
 testImport:
 - package: github.com/stretchr/testify
   version: ^1.1.4
