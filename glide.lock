@@ -1,5 +1,5 @@
-hash: ead599e75df7d402323429826c2ff9bea41a3c74f81e520a0167a3ef9e2f849b
-updated: 2017-09-21T17:25:05.919244745+02:00
+hash: bf4929beb06f0abdf5b2602ede39c3b64cf5d8e0b9a5bd0e39aaad00db4e165c
+updated: 2017-09-21T19:09:34.563949343+02:00
 imports:
 - name: github.com/gogo/protobuf
   version: dda3e8acadcc9affc16faf33fbb229db78399245
@@ -73,7 +73,7 @@ imports:
   subpackages:
   - protocol
   - uast
-- name: srcd.works/go-errors.v0
+- name: gopkg.in/src-d/go-errors.v0
   version: 6f07baca276330431b44ece8ee84ac98167bc4ea
 testImports:
 - name: github.com/davecgh/go-spew
