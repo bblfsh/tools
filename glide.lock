@@ -1,5 +1,5 @@
-hash: b6c813ab6d3fe9602a90937f6f4e3bb58b1d851295fd9966e6cfacad2da21f82
-updated: 2017-10-03T16:43:12.623403045+02:00
+hash: cad5ab79b0844ec0b1381afe95ff974b912fcc011e539b969d3bda823fb0d0e5
+updated: 2017-10-16T17:52:35.552041501+02:00
 imports:
 - name: github.com/gogo/protobuf
   version: dda3e8acadcc9affc16faf33fbb229db78399245
@@ -54,8 +54,9 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: f92cdcd7dcdc69e81b2d7b338479a19a8723cfa3
+  version: f7bf885db0b7479a537ec317c6e48ce53145f3db
   subpackages:
+  - balancer
   - codes
   - connectivity
   - credentials
@@ -66,12 +67,13 @@ imports:
   - metadata
   - naming
   - peer
+  - resolver
   - stats
   - status
   - tap
   - transport
 - name: gopkg.in/bblfsh/sdk.v1
-  version: 421904bf0bfbebd6b56c63a144f9c81ae87348ed
+  version: 32aa0b974ef93fce79e6336067c877a0e729496b
   subpackages:
   - protocol
   - uast
