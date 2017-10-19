@@ -43,6 +43,17 @@ If the server is in a different location, use the `address` parameter:
 Once the connection with the server is working fine, you can use any other
 available tool in a similar way.
 
+### Available tools
+
+Apart from the dummy tool, the following tools are currently provided:
+
+* cyclomatic: Parses a code file and prints its
+  [cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
+* npath: Parses a code file and prints the
+  [npath complexity](https://pmd.github.io/pmd-5.7.0/pmd-java/xref/net/sourceforge/pmd/lang/java/rule/codesize/NPathComplexityRule.html)
+  of its functions
+* tokenizer: Parses a code file and extracts and prints its tokens
+
 ## How to add a new tool to Babelfish Tools
 
 Adding a new tool to Babelfish Tools involves two steps: implementing
