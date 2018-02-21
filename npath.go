@@ -38,8 +38,17 @@ func NPathComplexity(n *uast.Node) []*NPathData {
 	} else {
 		funcDecs := deepChildrenOfRoles(n, []uast.Role{uast.Function, uast.Declaration}, []uast.Role{uast.Argument})
 		for _, funcDec := range funcDecs {
-			names = append(names, childrenOfRoles(funcDec, []uast.Role{uast.Function, uast.Name}, nil)[0].Token)
-			funcs = append(funcs, childrenOfRoles(funcDec, []uast.Role{uast.Function, uast.Body}, nil)[0])
+			if containsRoles(funcDec, []uast.Role{uast.Function, uast.Name}, nil) {
+				names = append(names, funcDec.Token)
+			}
+			childNames := childrenOfRoles(funcDec, []uast.Role{uast.Function, uast.Name}, nil)
+			if len(childNames) > 0 {
+				names = append(names, childNames[0].Token)
+			}
+			childFuncs := childrenOfRoles(funcDec, []uast.Role{uast.Function, uast.Body}, nil)
+			if len(childFuncs) > 0 {
+				funcs = append(funcs, childFuncs[0])
+			}
 		}
 	}
 	for i, function := range funcs {
@@ -98,10 +107,10 @@ func visitIf(n *uast.Node) int {
 	ifCondition := childrenOfRoles(n, []uast.Role{uast.If, uast.Condition}, nil)
 	ifElse := childrenOfRoles(n, []uast.Role{uast.If, uast.Else}, nil)
 
-	if len(ifElse) == 0 {
-		npath++
-	} else {
+	if len(ifElse) > 0 {
 		npath += complexityMultOf(ifElse[0])
+	} else {
+		npath++
 	}
 	npath *= complexityMultOf(ifThen[0])
 	npath += expressionComp(ifCondition[0])
@@ -116,11 +125,12 @@ func visitWhile(n *uast.Node) int {
 	whileBody := childrenOfRoles(n, []uast.Role{uast.While, uast.Body}, nil)
 	whileElse := childrenOfRoles(n, []uast.Role{uast.While, uast.Else}, nil)
 	// Some languages like python can have an else in a while loop
-	if len(whileElse) == 0 {
-		npath++
-	} else {
+	if len(whileElse) > 0 {
 		npath += complexityMultOf(whileElse[0])
+	} else {
+		npath++
 	}
+
 	npath *= complexityMultOf(whileBody[0])
 	npath += expressionComp(whileCondition[0])
 
@@ -143,9 +153,9 @@ func visitFor(n *uast.Node) int {
 	// (npath of for + bool_comp of for + 1) * npath of next
 	npath := 1
 	forBody := childrenOfRoles(n, []uast.Role{uast.For, uast.Body}, nil)
-
-	npath *= complexityMultOf(forBody[0])
-
+	if len(forBody) > 0 {
+		npath *= complexityMultOf(forBody[0])
+	}
 	npath++
 	return npath
 }
@@ -162,7 +172,7 @@ func visitSwitch(n *uast.Node) int {
 	switchCases := childrenOfRoles(n, []uast.Role{uast.Statement, uast.Switch, uast.Case}, []uast.Role{uast.Body})
 	npath := 0
 
-	if len(caseDefault) != 0 {
+	if len(caseDefault) > 0 {
 		npath += complexityMultOf(caseDefault[0])
 	} else {
 		npath++
@@ -185,13 +195,13 @@ func visitTry(n *uast.Node) int {
 	tryFinaly := childrenOfRoles(n, []uast.Role{uast.Try, uast.Finally}, nil)
 
 	catchComp := 0
-	if len(tryCatch) != 0 {
+	if len(tryCatch) > 0 {
 		for _, catch := range tryCatch {
 			catchComp += complexityMultOf(catch)
 		}
 	}
 	finallyComp := 0
-	if len(tryFinaly) != 0 {
+	if len(tryFinaly) > 0 {
 		finallyComp = complexityMultOf(tryFinaly[0])
 	}
 	npath := complexityMultOf(tryBody[0]) + catchComp + finallyComp
