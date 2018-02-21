@@ -110,12 +110,6 @@ func visitIf(n *uast.Node) int {
 	if len(ifElse) > 0 {
 		npath += complexityMultOf(ifElse[0])
 	} else {
-		// This if is a short circuit to avoid the two roles in the switch problem
-		if containsRole(ifElse[0], uast.If) {
-			npath += visitIf(ifElse[0])
-		} else {
-			npath += complexityMultOf(ifElse[0])
-		}
 		npath++
 	}
 	npath *= complexityMultOf(ifThen[0])
