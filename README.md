@@ -8,13 +8,15 @@ Language analysis tools on top of Babelfish
 ## Build
 
 ```sh
-make dependencies
-go build
+go get -u -v -d github.com/bblfsh/tools/...
 ```
 
 If you want to build a docker image containing Babelfish Tools, run:
 
 `make build`
+
+If you clone the repo manually, remember that it should be in your 
+`$GOPATH/src/github.com/bblfsh` directory to successfully build.
 
 ## Usage
 
