@@ -18,9 +18,9 @@ env:
 
 script:
   - make test-coverage
-  # TODO(bzz): migrate to src-d/ci, use 'make test'
+  # TODO(#19): migrate to src-d/ci, use 'make test'
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
-# TODO(bzz): migrate to src-d/ci, add separate release stage
+# TODO(#19): migrate to src-d/ci, add separate release stage
