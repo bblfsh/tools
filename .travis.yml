@@ -1,7 +1,7 @@
 language: go
 
 go:
-  - 1.8
+  - 1.12
   - tip
 
 matrix:
@@ -9,17 +9,18 @@ matrix:
   allow_failures:
     - go: tip
 
-sudo: required
-
 services:
   - docker
 
-before_install:
-  - make dependencies
+env:
+  global:
+    - GO111MODULE=on
 
 script:
   - make test-coverage
+  # TODO(bzz): migrate to src-d/ci, use 'make test'
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - make push
+
+# TODO(bzz): migrate to src-d/ci, add separate release stage

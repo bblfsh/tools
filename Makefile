@@ -94,10 +94,10 @@ test-internal:
 	export TEST_NETWORKING=1; \
 	$(GO_TEST) $(NOVENDOR_PACKAGES)
 
-test-coverage: dependencies docker-build
-	$(DOCKER_RUN) --privileged -v $(GOPATH):/go $(DOCKER_BUILD_IMAGE) make test-coverage-internal
+test-coverage-internal: dependencies docker-build
+	$(DOCKER_RUN) --privileged -v $(GOPATH):/go $(DOCKER_BUILD_IMAGE) make test-coverage
 
-test-coverage-internal:
+test-coverage:
 	export TEST_NETWORKING=1; \
 	echo "" > $(COVERAGE_REPORT); \
 	for dir in $(NOVENDOR_PACKAGES); do \
